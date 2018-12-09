@@ -6,11 +6,17 @@ export default class NewScreen extends React.Component {
     title: 'New Exercise',
   };
 
+  state = {
+    newExercise: ''
+  };
+
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <SafeAreaView style={styles.container}>
         <Button
-          onPress={() => this.props.navigation.navigate('Home')}
+          onPress={() => navigate('Home')}
           title="Return Home"
         />
         <View style={styles.formSection}>
@@ -19,9 +25,12 @@ export default class NewScreen extends React.Component {
             style={styles.textInput}
             placeholder="enter new exercise"
             returnKeyType='done'
-            // value={this.state.newTask}
-            // onChangeText={newTask => this.setState({newTask})}
-            // onSubmitEditing={event => this.addTask(event.nativeEvent.text)}
+            value={this.state.newExercise}
+            onChangeText={newExercise => this.setState({newExercise})}
+          />
+          <Button
+            onPress={() => navigate('Home', {newExercise: this.state.newExercise})}
+            title="Create Exercise"
           />
         </View>
       </SafeAreaView>

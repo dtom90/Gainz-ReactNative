@@ -20,6 +20,28 @@ export default class HomeScreen extends React.Component {
     }
   };
 
+  state = {
+    exercises: [
+      {'key': 'Push-ups'},
+      {'key': 'Pull-ups'},
+      {'key': 'Dips'},
+    ]
+  };
+
+  addExercise = (newExercise) => {
+    this.setState({
+      exercises: this.state.exercises.concat([{
+        key: newExercise
+      }])
+    });
+  };
+
+  componentDidMount() {
+    const newExercise = this.props.navigation.getParam('newExercise', '');
+    if(newExercise)
+      this.addExercise(newExercise);
+  }
+
   render() {
     const { navigate } = this.props.navigation;
 
@@ -28,7 +50,7 @@ export default class HomeScreen extends React.Component {
 
         <ScrollView style={styles.container}>
 
-            <ExerciseList exercises={exercises} />
+            <ExerciseList exercises={this.state.exercises} />
 
         </ScrollView>
 
@@ -41,13 +63,6 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
-
-const exercises = [
-  {'key': 'Push-ups'},
-  {'key': 'Pull-ups'},
-  {'key': 'Dips'},
-  {'key': 'Burpees'}
-];
 
 class ExerciseList extends  React.PureComponent {
 
