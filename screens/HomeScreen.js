@@ -5,6 +5,7 @@ import {
   Text,
   FlatList,
   View,
+  Button
 } from 'react-native';
 
 export default class HomeScreen extends React.Component {
@@ -20,6 +21,8 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <View style={styles.container}>
 
@@ -28,6 +31,11 @@ export default class HomeScreen extends React.Component {
             <ExerciseList exercises={exercises} />
 
         </ScrollView>
+
+        <Button
+          onPress={() => navigate('New')}
+          title="New Exercise"
+        />
 
       </View>
     );
