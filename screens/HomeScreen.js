@@ -30,15 +30,13 @@ export default class HomeScreen extends React.Component {
 
   addExercise = (newExercise) => {
     this.setState({
-      exercises: this.state.exercises.concat([{
-        key: newExercise
-      }])
+      exercises: this.state.exercises.concat([newExercise])
     });
   };
 
   componentDidMount() {
-    const newExercise = this.props.navigation.getParam('newExercise', '');
-    if(newExercise)
+    const newExercise = this.props.navigation.getParam('newExercise', {});
+    if('key' in newExercise)
       this.addExercise(newExercise);
   }
 

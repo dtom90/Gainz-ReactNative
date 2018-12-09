@@ -7,7 +7,10 @@ export default class NewScreen extends React.Component {
   };
 
   state = {
-    newExercise: ''
+    newExercise: '',
+    numReps: null,
+    numSets: null,
+    secRest: null
   };
 
   render() {
@@ -20,7 +23,9 @@ export default class NewScreen extends React.Component {
           title="Return Home"
         />
         <View style={styles.formSection}>
+
           <Text style={styles.titleText}>Enter New Exercise</Text>
+
           <TextInput
             style={styles.textInput}
             placeholder="enter new exercise"
@@ -28,10 +33,43 @@ export default class NewScreen extends React.Component {
             value={this.state.newExercise}
             onChangeText={newExercise => this.setState({newExercise})}
           />
+
+          <TextInput
+            style={styles.textInput}
+            placeholder="enter the number of reps per set"
+            returnKeyType='done'
+            value={this.state.numReps}
+            onChangeText={numReps => this.setState({numReps})}
+          />
+
+          <TextInput
+            style={styles.textInput}
+            placeholder="enter the number of sets per exercise"
+            returnKeyType='done'
+            value={this.state.numSets}
+            onChangeText={numSets => this.setState({numSets})}
+          />
+
+          <TextInput
+            style={styles.textInput}
+            placeholder="enter the number of seconds of rest between sets"
+            returnKeyType='done'
+            value={this.state.secRest}
+            onChangeText={secRest => this.setState({secRest})}
+          />
+
           <Button
-            onPress={() => navigate('Home', {newExercise: this.state.newExercise})}
+            onPress={() => navigate('Home', {
+              newExercise: {
+                key: this.state.newExercise,
+                numReps: this.state.numReps,
+                numSets: this.state.numSets,
+                secRest: this.state.secRest
+              }
+            })}
             title="Create Exercise"
           />
+
         </View>
       </SafeAreaView>
     );
