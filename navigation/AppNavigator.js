@@ -3,10 +3,12 @@ import { createSwitchNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import NewScreen from "../screens/NewScreen";
+import ExerciseScreen from "../screens/ExerciseScreen";
 
 export default createSwitchNavigator({
   // You could add another route here for authentication.
   // Read more at https://reactnavigation.org/docs/en/auth-flow.html
   Main: MainTabNavigator,
-  New: NewScreen
+  New: NewScreen,
+  Exercise: ExerciseScreen
 });

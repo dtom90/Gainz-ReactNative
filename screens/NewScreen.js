@@ -7,7 +7,7 @@ export default class NewScreen extends React.Component {
   };
 
   state = {
-    newExercise: '',
+    name: '',
     numReps: null,
     numSets: null,
     secRest: null
@@ -28,15 +28,16 @@ export default class NewScreen extends React.Component {
 
           <TextInput
             style={styles.textInput}
-            placeholder="enter new exercise"
+            placeholder="exercise name"
             returnKeyType='done'
             value={this.state.newExercise}
-            onChangeText={newExercise => this.setState({newExercise})}
+            onChangeText={name => this.setState({name})}
           />
 
           <TextInput
             style={styles.textInput}
-            placeholder="enter the number of reps per set"
+            placeholder="reps per set"
+            keyboardType="numeric"
             returnKeyType='done'
             value={this.state.numReps}
             onChangeText={numReps => this.setState({numReps})}
@@ -44,7 +45,7 @@ export default class NewScreen extends React.Component {
 
           <TextInput
             style={styles.textInput}
-            placeholder="enter the number of sets per exercise"
+            placeholder="sets per exercise"
             returnKeyType='done'
             value={this.state.numSets}
             onChangeText={numSets => this.setState({numSets})}
@@ -52,7 +53,7 @@ export default class NewScreen extends React.Component {
 
           <TextInput
             style={styles.textInput}
-            placeholder="enter the number of seconds of rest between sets"
+            placeholder="seconds of rest between sets"
             returnKeyType='done'
             value={this.state.secRest}
             onChangeText={secRest => this.setState({secRest})}
@@ -61,7 +62,7 @@ export default class NewScreen extends React.Component {
           <Button
             onPress={() => navigate('Home', {
               newExercise: {
-                key: this.state.newExercise,
+                key: this.state.name,
                 numReps: this.state.numReps,
                 numSets: this.state.numSets,
                 secRest: this.state.secRest
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 
-  formSection: {
+  section: {
     flex: 1,
     textAlign: 'center'
   },

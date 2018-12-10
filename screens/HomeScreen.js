@@ -2,7 +2,6 @@ import React from 'react';
 import {
   ScrollView,
   StyleSheet,
-  Text,
   FlatList,
   View,
   Button
@@ -22,9 +21,18 @@ export default class HomeScreen extends React.Component {
 
   state = {
     exercises: [
-      {'key': 'Push-ups'},
-      {'key': 'Pull-ups'},
-      {'key': 'Dips'},
+      {
+        'key': 'Pull-ups',
+        'numReps': 5,
+        'numSets': 4,
+        'secRest': 30
+      },
+      {
+        'key': 'Burpees',
+        'numReps': 10,
+        'numSets': 5,
+        'secRest': 30
+      },
     ]
   };
 
@@ -48,7 +56,7 @@ export default class HomeScreen extends React.Component {
 
         <ScrollView style={styles.container}>
 
-            <ExerciseList exercises={this.state.exercises} />
+            <ExerciseList exercises={this.state.exercises} navigate={navigate} />
 
         </ScrollView>
 
@@ -65,10 +73,19 @@ export default class HomeScreen extends React.Component {
 class ExerciseList extends  React.PureComponent {
 
   render() {
+    const navigate = this.props.navigate;
+
     return (
       <FlatList
         data={this.props.exercises}
-        renderItem={({item}) => <Text style={styles.exercise}>{item.key}</Text>}
+        renderItem={({item}) => <Button style={styles.exercise}
+                                        title={item.key}
+                                        onPress={() => navigate('Exercise', {
+                                          name: item.key,
+                                          numReps: item.numReps,
+                                          numSets: item.numSets,
+                                          secRest: item.secRest
+                                        })} />}
       />
     );
   }
