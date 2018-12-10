@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView, View, Button, Text, Image} from 'react-native';
+import {StyleSheet, SafeAreaView, View, Text, Image} from 'react-native';
 
 export default class ExerciseScreen extends React.Component {
   static navigationOptions = {
@@ -15,10 +15,7 @@ export default class ExerciseScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        <Button
-          onPress={() => navigation.navigate('Home')}
-          title="Return Home"
-        />
+
         <View style={styles.section}>
 
           <Text style={styles.titleText}>{name}</Text>
@@ -56,7 +53,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
     fontSize: 30,
-    marginBottom: 20
+    margin: 20
   },
 
   exercise: {

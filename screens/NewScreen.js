@@ -18,11 +18,8 @@ export default class NewScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        <Button
-          onPress={() => navigate('Home')}
-          title="Return Home"
-        />
-        <View style={styles.formSection}>
+
+        <View style={styles.section}>
 
           <Text style={styles.titleText}>Enter New Exercise</Text>
 
@@ -59,17 +56,19 @@ export default class NewScreen extends React.Component {
             onChangeText={secRest => this.setState({secRest})}
           />
 
-          <Button
-            onPress={() => navigate('Home', {
-              newExercise: {
-                key: this.state.name,
-                numReps: this.state.numReps,
-                numSets: this.state.numSets,
-                secRest: this.state.secRest
-              }
-            })}
-            title="Create Exercise"
-          />
+          <View style={styles.buttonWrapper}>
+            <Button
+              onPress={() => navigate('Home', {
+                newExercise: {
+                  key: this.state.name,
+                  numReps: this.state.numReps,
+                  numSets: this.state.numSets,
+                  secRest: this.state.secRest
+                }
+              })}
+              title="Create Exercise"
+            />
+          </View>
 
         </View>
       </SafeAreaView>
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
     fontSize: 30,
-    marginBottom: 20
+    margin: 20
   },
 
   textInput: {
@@ -104,4 +103,13 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 5
   },
+
+  buttonWrapper: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.125)',
+    marginLeft: 10,
+    marginRight: 10
+  },
+
 });
