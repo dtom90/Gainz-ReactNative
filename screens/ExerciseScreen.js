@@ -8,21 +8,18 @@ export default class ExerciseScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const name = navigation.getParam('name', {});
-    const numReps = navigation.getParam('numReps', {});
-    const numSets = navigation.getParam('numSets', {});
-    const secRest = navigation.getParam('secRest', {});
+    const exercise = navigation.getParam('exercise', {});
 
     return (
       <SafeAreaView style={styles.container}>
 
         <View style={styles.section}>
 
-          <Text style={styles.titleText}>{name}</Text>
+          <Text style={styles.titleText}>{exercise.key}</Text>
 
-          <Text style={styles.exercise}>Number of reps: {numReps}</Text>
-          <Text style={styles.exercise}>Number of sets: {numSets}</Text>
-          <Text style={styles.exercise}>Seconds of rest: {secRest}</Text>
+          <Text style={styles.exercise}>Number of reps: {exercise.numReps}</Text>
+          <Text style={styles.exercise}>Number of sets: {exercise.numSets}</Text>
+          <Text style={styles.exercise}>Seconds of rest: {exercise.secRest}</Text>
 
         </View>
 

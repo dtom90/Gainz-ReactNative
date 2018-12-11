@@ -40,14 +40,23 @@ export default class HomeScreen extends React.Component {
   }
 
   addExercise = (newExercise) => {
-    this.setState({
-      exercises: this.state.exercises.concat([newExercise])
-    });
+    if ('key' in newExercise && newExercise.key) {
+      if (this.state.exercises.filter(e => e.key === newExercise.key).length > 0){
+        return 'This exercise already exists!'
+      } else {
+        this.setState({
+          exercises: this.state.exercises.concat([newExercise])
+        });
+        return ''
+      }
+    } else {
+      return 'Exercise needs a name'
+    }
   };
 
   componentDidMount() {
     const newExercise = this.props.navigation.getParam('newExercise', {});
-    if('key' in newExercise)
+
       this.addExercise(newExercise);
   }
 
@@ -64,11 +73,13 @@ export default class HomeScreen extends React.Component {
         </ScrollView>
 
         <View style={styles.buttonWrapper}>
+
           <Button
             title="New Exercise"
-            onPress={() => navigate('New')}
+            onPress={() => navigate('New', {addExercise: this.addExercise})}
             color="green"
           />
+
         </View>
 
       </View>
@@ -88,12 +99,7 @@ class ExerciseList extends  React.PureComponent {
           <View style={styles.buttonWrapper}>
             <Button style={styles.exercise}
                     title={item.key}
-                    onPress={() => navigate('Exercise', {
-                      name: item.key,
-                      numReps: item.numReps,
-                      numSets: item.numSets,
-                      secRest: item.secRest
-                    })} />
+                    onPress={() => navigate('Exercise', {exercise: item})} />
           </View>}
       />
     );
