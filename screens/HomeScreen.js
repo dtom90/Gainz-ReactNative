@@ -4,7 +4,7 @@ import globalStyles from '../components/GlobalStyles';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Exercises',
+    title: 'Workouts',
     headerStyle: {
       marginBottom: 10
     },
@@ -37,18 +37,18 @@ export default class HomeScreen extends React.Component {
     };
   }
 
-  addExercise = (newExercise) => {
-    if ('key' in newExercise && newExercise.key) {
-      if (this.state.workouts.filter(e => e.key === newExercise.key).length > 0){
-        return 'This exercise already exists!'
+  addWorkout = (newWorkout) => {
+    if ('key' in newWorkout && newWorkout.key) {
+      if (this.state.workouts.filter(e => e.key === newWorkout.key).length > 0){
+        return 'This workout name already exists'
       } else {
         this.setState({
-          workouts: this.state.workouts.concat([newExercise])
+          workouts: this.state.workouts.concat([newWorkout])
         });
         return ''
       }
     } else {
-      return 'Exercise needs a name'
+      return 'Workout needs a name'
     }
   };
 
@@ -71,7 +71,7 @@ export default class HomeScreen extends React.Component {
           <View style={globalStyles.itemWrapper}>
             <Button
               title="+ New Workout"
-              onPress={() => navigate('New', {addExercise: this.addExercise})}
+              onPress={() => navigate('New', {addWorkout: this.addWorkout})}
               color="green"
             />
           </View>

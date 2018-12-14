@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Button, Text, TextInput} from 'react-native';
+import globalStyles from '../components/GlobalStyles';
 
 export default class NewScreen extends React.Component {
   static navigationOptions = {
@@ -8,21 +9,15 @@ export default class NewScreen extends React.Component {
 
   state = {
     name: '',
-    numReps: null,
-    numSets: null,
-    secRest: null,
     error: ''
   };
 
   async createExercise() {
     const { navigation } = this.props;
-    const addExercise = navigation.getParam('addExercise', {});
+    const addWorkout = navigation.getParam('addWorkout', {});
 
-    const error = await addExercise({
+    const error = await addWorkout({
       key: this.state.name,
-      numReps: this.state.numReps,
-      numSets: this.state.numSets,
-      secRest: this.state.secRest
     });
 
     if (error) {
@@ -35,44 +30,16 @@ export default class NewScreen extends React.Component {
   render() {
 
     return (
-      <View style={styles.section}>
+      <View style={globalStyles.container}>
 
-        <Text style={styles.titleText}>Enter a New Exercise</Text>
+        <Text style={styles.titleText}>New Workout</Text>
 
-        <TextInput
-          style={styles.textInput}
-          placeholder="exercise name"
-          returnKeyType='done'
-          value={this.state.newExercise}
-          onChangeText={name => this.setState({name})}
+        <Text style={styles.inputLabel}>Workout Name:</Text>
+        <TextInput style={styles.textInput}
+                   onChangeText={name => this.setState({name})}
         />
 
-        <TextInput
-          style={styles.textInput}
-          placeholder="reps per set"
-          keyboardType="numeric"
-          returnKeyType='done'
-          value={this.state.numReps}
-          onChangeText={numReps => this.setState({numReps})}
-        />
-
-        <TextInput
-          style={styles.textInput}
-          placeholder="sets per exercise"
-          returnKeyType='done'
-          value={this.state.numSets}
-          onChangeText={numSets => this.setState({numSets})}
-        />
-
-        <TextInput
-          style={styles.textInput}
-          placeholder="seconds of rest between sets"
-          returnKeyType='done'
-          value={this.state.secRest}
-          onChangeText={secRest => this.setState({secRest})}
-        />
-
-        <View style={styles.buttonWrapper}>
+        <View style={globalStyles.itemWrapper}>
           <Button
             title="Create Exercise"
             onPress={() => this.createExercise()}
@@ -90,12 +57,6 @@ export default class NewScreen extends React.Component {
 
 const styles = StyleSheet.create({
 
-  section: {
-    flex: 1,
-    textAlign: 'center',
-    backgroundColor: 'white'
-  },
-
   titleText: {
     textAlign: 'center',
     fontWeight: '600',
@@ -103,23 +64,13 @@ const styles = StyleSheet.create({
     margin: 20
   },
 
-  textInput: {
-    height: 50,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.125)',
-    marginLeft: 10,
-    marginRight: 10,
-    borderRadius: 5
+  inputLabel: {
+    marginLeft: 10
   },
 
-  buttonWrapper: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.125)',
-    marginLeft: 10,
-    marginRight: 10
-  },
+  textInput: Object.assign({
+    height: 50,
+  }, globalStyles.itemWrapper),
 
   errorWrapper: {
     flex: 1,

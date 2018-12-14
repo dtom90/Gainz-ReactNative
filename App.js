@@ -1,6 +1,7 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, SafeAreaView } from 'react-native';
+import { Platform, StatusBar, SafeAreaView } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
+import globalStyles from './components/GlobalStyles';
 import AppNavigator from './navigation/AppNavigator';
 
 export default class App extends React.Component {
@@ -19,7 +20,7 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={globalStyles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <AppNavigator />
         </SafeAreaView>
@@ -52,10 +53,3 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-});
