@@ -4,11 +4,11 @@ import { createStackNavigator } from 'react-navigation';
 // import MainTabNavigator from './MainTabNavigator';
 import HomeScreen from "../screens/HomeScreen";
 import NewScreen from "../screens/NewScreen";
-import ExerciseScreen from "../screens/ExerciseScreen";
+import WorkoutScreen from "../screens/WorkoutScreen";
 
 export default createStackNavigator({
   // Main: MainTabNavigator,
   Home: HomeScreen,
   New: NewScreen,
-  Exercise: ExerciseScreen
+  Workout: WorkoutScreen
 });
