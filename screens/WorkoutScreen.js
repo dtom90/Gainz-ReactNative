@@ -16,7 +16,7 @@ export default class WorkoutScreen extends React.Component {
 
         <View style={styles.section}>
 
-          <Text style={styles.titleText}>{workout.key}</Text>
+          <Text style={styles.title}>{workout.key}</Text>
 
           <FlatList data={workout.sequence}
                     renderItem={({item}) =>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch'
   },
 
-  titleText: {
+  title: {
     textAlign: 'center',
     fontWeight: '600',
     fontSize: 30,

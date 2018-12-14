@@ -9,15 +9,17 @@ export default class NewScreen extends React.Component {
 
   state = {
     name: '',
+    sequence: [{key: ''}],
     error: ''
   };
 
-  async createExercise() {
+  async createWorkout() {
     const { navigation } = this.props;
     const addWorkout = navigation.getParam('addWorkout', {});
 
     const error = await addWorkout({
       key: this.state.name,
+      sequence: this.state.sequence
     });
 
     if (error) {
@@ -27,22 +29,38 @@ export default class NewScreen extends React.Component {
     }
   }
 
+  modifyExercise(name, index) {
+    const sequence = this.state.sequence;
+    sequence[index].key = name;
+    this.setState({sequence})
+  }
+
   render() {
 
     return (
       <View style={globalStyles.container}>
 
-        <Text style={styles.titleText}>New Workout</Text>
+        <Text style={styles.title}>New Workout</Text>
 
         <Text style={styles.inputLabel}>Workout Name:</Text>
         <TextInput style={styles.textInput}
                    onChangeText={name => this.setState({name})}
         />
 
+        <Text style={[styles.title, styles.sectionTitle]}>Workout Sequence</Text>
+
+        {this.state.sequence.map((item, i) =>
+          <TextInput key={i}
+                     style={styles.textInput}
+                     value={item.key}
+                     onChangeText={text => this.modifyExercise(text, i)}
+          />
+        )}
+
         <View style={globalStyles.itemWrapper}>
           <Button
-            title="Create Exercise"
-            onPress={() => this.createExercise()}
+            title="Create Workout"
+            onPress={() => this.createWorkout()}
           />
         </View>
 
@@ -57,20 +75,22 @@ export default class NewScreen extends React.Component {
 
 const styles = StyleSheet.create({
 
-  titleText: {
+  title: {
     textAlign: 'center',
     fontWeight: '600',
     fontSize: 30,
     margin: 20
   },
 
+  sectionTitle: {
+    fontSize: 20,
+  },
+
   inputLabel: {
     marginLeft: 10
   },
 
-  textInput: Object.assign({
-    height: 50,
-  }, globalStyles.itemWrapper),
+  textInput: Object.assign({height: 50}, globalStyles.itemWrapper),
 
   errorWrapper: {
     flex: 1,
