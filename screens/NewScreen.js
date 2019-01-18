@@ -9,7 +9,8 @@ export default class NewScreen extends React.Component {
 
   state = {
     name: '',
-    sequence: [{key: ''}],
+    sequence: [{key: '0', exercise: ''}],
+    newExercise: false,
     error: ''
   };
 
@@ -31,8 +32,19 @@ export default class NewScreen extends React.Component {
 
   modifyExercise(name, index) {
     const sequence = this.state.sequence;
-    sequence[index].key = name;
-    this.setState({sequence})
+    sequence[index].exercise = name;
+
+    let newExercise = false;
+    if (index === sequence.length-1)
+      newExercise = true;
+
+    this.setState({sequence, newExercise})
+  }
+
+  addExercise() {
+    const sequence = this.state.sequence;
+    sequence.push({key: sequence.length.toString(), exercise: ''});
+    this.setState({sequence, newExercise: false});
   }
 
   render() {
@@ -52,10 +64,20 @@ export default class NewScreen extends React.Component {
         {this.state.sequence.map((item, i) =>
           <TextInput key={i}
                      style={styles.textInput}
-                     value={item.key}
+                     value={item.exercise}
                      onChangeText={text => this.modifyExercise(text, i)}
           />
         )}
+
+        {this.state.newExercise &&
+        <View style={globalStyles.itemWrapper}>
+          <Button
+            title="+ New Workout"
+            color="green"
+            onPress={() => this.addExercise()}
+          />
+        </View>
+        }
 
         <View style={globalStyles.itemWrapper}>
           <Button

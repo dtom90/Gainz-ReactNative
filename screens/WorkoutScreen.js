@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image, FlatList} from 'react-native';
+import {StyleSheet, View, Text, FlatList} from 'react-native';
 import globalStyles from '../components/GlobalStyles';
 
 export default class WorkoutScreen extends React.Component {
@@ -21,17 +21,10 @@ export default class WorkoutScreen extends React.Component {
           <FlatList data={workout.sequence}
                     renderItem={({item}) =>
                       <View style={globalStyles.itemWrapper}>
-                        <Text style={styles.exercise}>{item.key}</Text>
+                        <Text style={styles.exercise}>{item.exercise}</Text>
                       </View>}
           />
 
-        </View>
-
-        <View style={[styles.section, styles.welcomeContainer]}>
-          <Image
-            source={require('../assets/images/icon.png')}
-            style={styles.welcomeImage}
-          />
         </View>
 
       </View>
@@ -54,9 +47,7 @@ const styles = StyleSheet.create({
   },
 
   exercise: {
-    fontSize: 20,
     textAlign: 'center',
-    padding: 10,
   },
 
   welcomeContainer: {

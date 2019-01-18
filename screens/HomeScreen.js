@@ -19,15 +19,29 @@ export default class HomeScreen extends React.Component {
     this.state = {
       workouts: [
         {
-          key: 'HIIT Workout',
+          key: 'Full Body Circuit',
           sequence: [
             {
-              key: 'Push-ups',
+              key: '0',
+              exercise: 'Pull-ups',
               sets: 4,
               rest: 30
             },
             {
-              key: 'Bicep curls',
+              key: '1',
+              exercise: 'Crunches',
+              sets: 4,
+              rest: 30
+            },
+            {
+              key: '2',
+              exercise: 'Push-ups',
+              sets: 4,
+              rest: 30
+            },
+            {
+              key: '3',
+              exercise: 'Squats',
               sets: 4,
               rest: 30
             }
