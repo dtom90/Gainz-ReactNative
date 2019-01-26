@@ -10,6 +10,7 @@ export default class NewScreen extends React.Component {
   state = {
     name: '',
     sequence: [{key: '0', exercise: ''}],
+    rounds: 1,
     newExercise: false,
     error: ''
   };
@@ -20,7 +21,8 @@ export default class NewScreen extends React.Component {
 
     const error = await addWorkout({
       key: this.state.name,
-      sequence: this.state.sequence
+      sequence: this.state.sequence,
+      rounds: this.state.rounds
     });
 
     if (error) {
@@ -78,6 +80,19 @@ export default class NewScreen extends React.Component {
           />
         </View>
         }
+
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <View style={{fontSize: 20, marginTop: 20, marginLeft: 10}}>
+            <Text style={styles.sectionTitle}>Rounds: </Text>
+          </View>
+          <TextInput
+            keyboardType = 'numeric'
+            style={Object.assign({flex: 1}, styles.textInput)}
+            value = {this.state.rounds.toString()}
+            onChangeText = {text => this.setState({rounds: text.replace(/[^0-9]/g, '')})}
+            maxLength={10}
+          />
+        </View>
 
         <View style={globalStyles.itemWrapper}>
           <Button

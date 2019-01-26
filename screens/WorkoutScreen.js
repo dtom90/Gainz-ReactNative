@@ -25,6 +25,10 @@ export default class WorkoutScreen extends React.Component {
                       </View>}
           />
 
+          <View style={globalStyles.itemWrapper}>
+            <Text style={styles.exercise}>Rounds: {workout.rounds}</Text>
+          </View>
+
         </View>
 
       </View>

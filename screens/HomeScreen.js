@@ -45,7 +45,8 @@ export default class HomeScreen extends React.Component {
               sets: 4,
               rest: 30
             }
-          ]
+          ],
+          rounds: 1
         },
       ]
     };
@@ -53,13 +54,18 @@ export default class HomeScreen extends React.Component {
 
   addWorkout = (newWorkout) => {
     if ('key' in newWorkout && newWorkout.key) {
-      if (this.state.workouts.filter(e => e.key === newWorkout.key).length > 0){
+      if (this.state.workouts.filter(e => e.key === newWorkout.key).length > 0) {
         return 'This workout name already exists'
       } else {
-        this.setState({
-          workouts: this.state.workouts.concat([newWorkout])
-        });
-        return ''
+        if (!newWorkout.sequence[0].exercise) {
+          return 'You must name at least one exercise in your workout sequence'
+        } else {
+          newWorkout.sequence = newWorkout.sequence.filter(ex => ex.exercise);
+          this.setState({
+            workouts: this.state.workouts.concat([newWorkout])
+          });
+          return ''
+        }
       }
     } else {
       return 'Workout needs a name'
