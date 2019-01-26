@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Button, Text, TextInput} from 'react-native';
+import {StyleSheet, View, Button, Text, TextInput, ScrollView} from 'react-native';
 import globalStyles from '../components/GlobalStyles';
 
 export default class NewScreen extends React.Component {
@@ -56,6 +56,8 @@ export default class NewScreen extends React.Component {
 
         <Text style={styles.title}>New Workout</Text>
 
+        <ScrollView>
+
         <Text style={styles.inputLabel}>Workout Name:</Text>
         <TextInput style={styles.textInput}
                    onChangeText={name => this.setState({name})}
@@ -81,17 +83,21 @@ export default class NewScreen extends React.Component {
         </View>
         }
 
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={{fontSize: 20, marginTop: 20, marginLeft: 10}}>
+        </ScrollView>
+
+        <View style={styles.roundsWrapper}>
+          <View>
             <Text style={styles.sectionTitle}>Rounds: </Text>
           </View>
-          <TextInput
-            keyboardType = 'numeric'
-            style={Object.assign({flex: 1}, styles.textInput)}
-            value = {this.state.rounds.toString()}
-            onChangeText = {text => this.setState({rounds: text.replace(/[^0-9]/g, '')})}
-            maxLength={10}
-          />
+          <View>
+            <TextInput
+              keyboardType = 'numeric'
+              style={Object.assign({width: 60}, styles.textInput)}
+              value = {this.state.rounds.toString()}
+              onChangeText = {text => this.setState({rounds: text.replace(/[^0-9]/g, '')})}
+              maxLength={10}
+            />
+          </View>
         </View>
 
         <View style={globalStyles.itemWrapper}>
@@ -128,6 +134,12 @@ const styles = StyleSheet.create({
   },
 
   textInput: Object.assign({height: 50}, globalStyles.itemWrapper),
+
+  roundsWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 
   errorWrapper: {
     flex: 1,
